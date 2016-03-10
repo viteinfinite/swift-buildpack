@@ -35,6 +35,10 @@ BUILDPACK_PATH=$compile_buildpack_dir source $compile_buildpack_dir/compile-exte
 mkdir -p $CACHE_DIR
 cd $CACHE_DIR
 
+# download and install libdispatch dependencies
+echo "Installing libdispatch dependencies"
+sudo apt-get install autoconf libtool libkqueue-dev libkqueue0 libdispatch-dev libdispatch0 libhttp-parser-dev libcurl4-openssl-dev libhiredis-dev libbsd-dev
+
 # download and unpack swift
 if [[ ! -d "$CACHE_DIR/$SWIFT_NAME_VERSION" ]]; then
   status "Installing Swift $SWIFT_VERSION"
@@ -55,9 +59,11 @@ if [[ ! -d "$CACHE_DIR/$CLANG_NAME_VERSION" ]]; then
 fi
 CLANG_PATH=$CACHE_DIR/$(echo $CLANG_NAME_VERSION/clang*)
 
-git clone https://github.com/apple/swift-corelibs-libdispatch.git && cd swift-corelibs-libdispatch && git submodule init && git submodule update && sh ./autogen.sh && ./configure --with-swift-toolchain=<path-to-swift>/usr --prefix=<path-to-swift>/usr && make && make install
-
 export PATH="$SWIFT_PATH/usr/bin:$CLANG_PATH/bin:$PATH"
+
+echo "Installing libdispatch" | indent
+git clone https://github.com/apple/swift-corelibs-libdispatch.git && cd swift-corelibs-libdispatch && git submodule init && git submodule update && sh ./autogen.sh && ./configure --with-swift-toolchain=$SWIFT_PATH/usr --prefix=$SWIFT_PATH/usr && make && make install
+echo "Installed libdispatch" | indent
 
 cd $BUILD_DIR
 status "Building Package"
