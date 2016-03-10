@@ -55,11 +55,13 @@ if [[ ! -d "$CACHE_DIR/$CLANG_NAME_VERSION" ]]; then
 fi
 CLANG_PATH=$CACHE_DIR/$(echo $CLANG_NAME_VERSION/clang*)
 
+git clone https://github.com/apple/swift-corelibs-libdispatch.git && cd swift-corelibs-libdispatch && git submodule init && git submodule update && sh ./autogen.sh && ./configure --with-swift-toolchain=<path-to-swift>/usr --prefix=<path-to-swift>/usr && make && make install
+
 export PATH="$SWIFT_PATH/usr/bin:$CLANG_PATH/bin:$PATH"
 
 cd $BUILD_DIR
 status "Building Package"
-swift build --configuration release | indent
+swift build -Xcc -fblocks --configuration release | indent
 
 # These should be statically linked, seems a swift bug
 status "Copying dynamic libraries"

@@ -38,14 +38,14 @@ resources:
 - name: repo
   type: git
   source:
-    uri: git@github.com:cloudfoundry-community/swift-buildpack.git
+    uri: git@github.com:viteinfinite/swift-buildpack.git
     branch: {{branch}}
     private_key: {{github-key}}
 
 - name: repo-docker-image
   type: git
   source:
-    uri: git@github.com:cloudfoundry-community/swift-buildpack.git
+    uri: git@github.com:viteinfinite/swift-buildpack.git
     branch: {{branch}}
     private_key: {{github-key}}
     paths: [ci/ci_image/*]

@@ -14,7 +14,7 @@ Example usage:
 $ ls
 Procfile Project.swift Sources
 
-$ cf push -b https://github.com/cloudfoundry-community/swift-buildpack.git
+$ cf push -b https://github.com/viteinfinite/swift-buildpack.git
 -----> Downloaded app package (4.0K)
 -----> Downloaded app buildpack cache (171M)
 -----> Buildpack version 1.0.0
@@ -60,7 +60,7 @@ $ cat .swift-version
 2.2-SNAPSHOT-2016-01-11-a
 ```
 
-See [manifest.yml](https://github.com/cloudfoundry-community/swift-buildpack/blob/master/manifest.yml#L14) for supported versions.
+See [manifest.yml](https://github.com/viteinfinite/swift-buildpack/blob/master/manifest.yml#L14) for supported versions.
 
 **NOTE**: *Since there are frequent Swift language changes, it's advised that you pin to your Swift version.*
 
@@ -82,14 +82,14 @@ Admin installation
 ------------------
 
 ```
-wget https://github.com/cloudfoundry-community/swift-buildpack/releases/download/v1.0.0/swift_buildpack-cached-v1.0.0.zip
+wget https://github.com/viteinfinite/swift-buildpack/releases/download/v1.0.0/swift_buildpack-cached-v1.0.0.zip
 cf create-buildpack swift_buildpack swift_buildpack*.zip 10
 ```
 
 Or to update:
 
 ```
-wget https://github.com/cloudfoundry-community/swift-buildpack/releases/download/v1.0.0/swift_buildpack-cached-v1.0.0.zip
+wget https://github.com/viteinfinite/swift-buildpack/releases/download/v1.0.0/swift_buildpack-cached-v1.0.0.zip
 cf update-buildpack swift_buildpack -p swift_buildpack*.zip
 ```
 
