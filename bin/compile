@@ -35,10 +35,6 @@ BUILDPACK_PATH=$compile_buildpack_dir source $compile_buildpack_dir/compile-exte
 mkdir -p $CACHE_DIR
 cd $CACHE_DIR
 
-# download and install libdispatch dependencies
-echo "Installing libdispatch dependencies"
-apt-get install autoconf libtool libkqueue-dev libkqueue0 libdispatch-dev libdispatch0 libhttp-parser-dev libcurl4-openssl-dev libhiredis-dev libbsd-dev
-
 # download and unpack swift
 if [[ ! -d "$CACHE_DIR/$SWIFT_NAME_VERSION" ]]; then
   status "Installing Swift $SWIFT_VERSION"
